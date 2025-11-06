@@ -81,8 +81,8 @@ const portfolioData2023 = {
                     categoriaPE: 'Alto'
                 }
             ],
-            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 2
         },
         {
@@ -101,8 +101,8 @@ const portfolioData2023 = {
                     categoriaPE: 'Medio'
                 }
             ],
-            backgroundColor: 'rgba(153, 102, 255, 0.7)',
-            borderColor: 'rgba(153, 102, 255, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 2
         }
     ]
@@ -210,12 +210,12 @@ new Chart(ctx2023, config2023);
 function createLegend2023() {
     const legendContainer = document.getElementById('chartLegend2023');
     const initiatives2023 = [
-        { label: 'AI/ML for Platforms', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2023', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
-        { label: 'Platform Ecosystem', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2023', npv: '250k€', pe: '90%', recursos: '75k€', categoria: 'Alto' },
-        { label: 'S/M Incentives', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2023', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
-        { label: 'Versioning & Pricing', color: 'rgba(75, 192, 192, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '75k€', categoria: 'Medio' },
-        { label: 'Trust & Defense', color: 'rgba(75, 192, 192, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90%', recursos: '250k€', categoria: 'Alto' },
-        { label: 'Open Standards', color: 'rgba(153, 102, 255, 1)', periodo: 'S2-2024', npv: '250k€', pe: '50%', recursos: '250k€', categoria: 'Medio' }
+        { label: 'AI/ML for Platforms', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2023', npv: '500k€', pe: '50', recursos: '250k€', categoria: 'Medio' },
+        { label: 'Platform Ecosystem', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2023', npv: '250k€', pe: '90', recursos: '75k€', categoria: 'Alto' },
+        { label: 'S/M Incentives', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2023', npv: '500k€', pe: '50', recursos: '250k€', categoria: 'Medio' },
+        { label: 'Versioning & Pricing', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50', recursos: '75k€', categoria: 'Medio' },
+        { label: 'Trust & Defense', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90', recursos: '250k€', categoria: 'Alto' },
+        { label: 'Open Standards', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '250k€', pe: '50', recursos: '250k€', categoria: 'Medio' }
     ];
 
     initiatives2023.forEach(initiative => {
@@ -225,7 +225,7 @@ function createLegend2023() {
         legendItem.innerHTML = `
             <div class="legend-color" style="background-color: ${initiative.color}"></div>
             <span>${emoji} <strong>${initiative.label}</strong> (${initiative.periodo})<br>
-            <small>NPV: ${initiative.npv} | PE: ${initiative.pe}% | Recursos: ${initiative.recursos}</small></span>
+            <small>NPV: ${initiative.npv} | PE: ${initiative.pe}% | Recursos: ${initiative.recursos}</small>
         `;
         legendContainer.appendChild(legendItem);
     });

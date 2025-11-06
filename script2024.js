@@ -206,13 +206,13 @@ new Chart(ctx2024, config2024);
 function createLegend2024() {
     const legendContainer = document.getElementById('chartLegend2024');
     const initiatives2024 = [
-        { label: 'AI/ML for Platforms', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
-        { label: 'S/M Incentives', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
-        { label: 'Trust & Defense', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90%', recursos: '250k€', categoria: 'Alto' },
-        { label: 'Audit Online & SDLC', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90%', recursos: '250k€', categoria: 'Alto' },
-        { label: 'ERP Core 2024', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '375k€', categoria: 'Medio' },
-        { label: 'CRM + CDP 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
-        { label: 'RPA Back-Office 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '250k€', pe: '90%', recursos: '75k€', categoria: 'Alto' }
+        { label: 'AI/ML for Platforms', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50', recursos: '250k€', categoria: 'Medio' },
+        { label: 'S/M Incentives', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50', recursos: '250k€', categoria: 'Medio' },
+        { label: 'Trust & Defense', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90', recursos: '250k€', categoria: 'Alto' },
+        { label: 'Audit Online & SDLC', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90', recursos: '250k€', categoria: 'Alto' },
+        { label: 'ERP Core 2024', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50', recursos: '375k€', categoria: 'Medio' },
+        { label: 'CRM + CDP 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '500k€', pe: '50', recursos: '250k€', categoria: 'Medio' },
+        { label: 'RPA Back-Office 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '250k€', pe: '90', recursos: '75k€', categoria: 'Alto' }
     ];
 
     initiatives2024.forEach(initiative => {
@@ -222,7 +222,7 @@ function createLegend2024() {
         legendItem.innerHTML = `
             <div class="legend-color" style="background-color: ${initiative.color}"></div>
             <span>${emoji} <strong>${initiative.label}</strong> (${initiative.periodo})<br>
-            <small>NPV: ${initiative.npv} | PE: ${initiative.pe}% | Recursos: ${initiative.recursos}</small></span>
+            <small>NPV: ${initiative.npv} | PE: ${initiative.pe}% | Recursos: ${initiative.recursos}</small>
         `;
         legendContainer.appendChild(legendItem);
     });
