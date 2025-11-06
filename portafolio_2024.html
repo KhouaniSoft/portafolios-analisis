@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio 2024 - Diagrama de Burbujas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        .back-button:hover {
+            background: #219a52;
+        }
+        .chart-container {
+            position: relative;
+            height: 600px;
+            margin: 20px 0;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .info-panel {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        .pe-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .summary {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Volver al Inicio</a>
+            <h1>📊 Portafolio 2024 (Después)</h1>
+            <div class="subtitle">Análisis de Priorización - NPV vs PE vs Recursos</div>
+        </div>
+        
+        <div class="info-panel">
+            <strong>Configuración del diagrama:</strong><br>
+            • <strong>Eje X</strong>: NPV (Retorno en k€)<br>
+            • <strong>Eje Y</strong>: PE (Probabilidad de Éxito en %)<br>
+            • <strong>Tamaño de burbuja</strong>: Recursos (k€)<br>
+            • <strong>Color</strong>: Semestre de prioridad
+        </div>
+
+        <div class="pe-scale">
+            <span>🔴 Bajo (10%)</span>
+            <span>🟡 Medio (50%)</span>
+            <span>🟢 Alto (90%)</span>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="portfolioBubbleChart2024"></canvas>
+        </div>
+
+        <div class="legend" id="chartLegend2024"></div>
+
+        <div class="summary">
+            <strong>📈 Resumen del Portafolio 2024:</strong><br>
+            • <strong>Total Inversión:</strong> 1,900k€<br>
+            • <strong>Total NPV Esperado:</strong> 3,000k€<br>
+            • <strong>Iniciativas S1-2024:</strong> 5 proyectos<br>
+            • <strong>Iniciativas S2-2024:</strong> 2 proyectos<br>
+            • <strong>Proyectos con Alta PE (90%):</strong> 3 proyectos<br>
+            • <strong>Proyectos con Media PE (50%):</strong> 4 proyectos
+        </div>
+    </div>
+
+    <script>
+        // Datos del portafolio 2024 con escala 10%-90%
+        const portfolioData2024 = {
+            datasets: [
+                {
+                    label: '1-Semestre 2024',
+                    data: [
+                        {
+                            x: 500, // NPV (k€)
+                            y: 50,  // PE (%)
+                            r: 50,  // Tamaño basado en recursos (k€)
+                            label: 'AI/ML for Platforms',
+                            recursos: 250,
+                            recursosRaw: 250,
+                            pe: 50,
+                            npv: 500,
+                            prioridad: '1-Semestre 2024',
+                            categoriaPE: 'Medio'
+                        },
+                        {
+                            x: 500, // NPV (k€)
+                            y: 50,  // PE (%)
+                            r: 50,  // Tamaño basado en recursos (k€)
+                            label: 'S/M Incentives',
+                            recursos: 250,
+                            recursosRaw: 250,
+                            pe: 50,
+                            npv: 500,
+                            prioridad: '1-Semestre 2024',
+                            categoriaPE: 'Medio'
+                        },
+                        {
+                            x: 250, // NPV (k€)
+                            y: 90,  // PE (%)
+                            r: 50,  // Tamaño basado en recursos (k€)
+                            label: 'Trust & Defense',
+                            recursos: 250,
+                            recursosRaw: 250,
+                            pe: 90,
+                            npv: 250,
+                            prioridad: '1-Semestre 2024',
+                            categoriaPE: 'Alto'
+                        },
+                        {
+                            x: 250, // NPV (k€)
+                            y: 90,  // PE (%)
+                            r: 50,  // Tamaño basado en recursos (k€)
+                            label: 'Audit Online & SDLC',
+                            recursos: 250,
+                            recursosRaw: 250,
+                            pe: 90,
+                            npv: 250,
+                            prioridad: '1-Semestre 2024',
+                            categoriaPE: 'Alto'
+                        },
+                        {
+                            x: 500, // NPV (k€)
+                            y: 50,  // PE (%)
+                            r: 75,  // Tamaño basado en recursos (k€) - más grande por 375k
+                            label: 'ERP Core 2024',
+                            recursos: 375,
+                            recursosRaw: 375,
+                            pe: 50,
+                            npv: 500,
+                            prioridad: '1-Semestre 2024',
+                            categoriaPE: 'Medio'
+                        }
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: '2-Semestre 2024',
+                    data: [
+                        {
+                            x: 500, // NPV (k€)
+                            y: 50,  // PE (%)
+                            r: 50,  // Tamaño basado en recursos (k€)
+                            label: 'CRM + CDP 2024',
+                            recursos: 250,
+                            recursosRaw: 250,
+                            pe: 50,
+                            npv: 500,
+                            prioridad: '2-Semestre 2024',
+                            categoriaPE: 'Medio'
+                        },
+                        {
+                            x: 250, // NPV (k€)
+                            y: 90,  // PE (%)
+                            r: 15,  // Tamaño basado en recursos (k€) - más pequeño por 75k
+                            label: 'RPA Back-Office 2024',
+                            recursos: 75,
+                            recursosRaw: 75,
+                            pe: 90,
+                            npv: 250,
+                            prioridad: '2-Semestre 2024',
+                            categoriaPE: 'Alto'
+                        }
+                    ],
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }
+            ]
+        };
+
+        // Configuración del gráfico 2024
+        const config2024 = {
+            type: 'bubble',
+            data: portfolioData2024,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = context.raw;
+                                return [
+                                    `Iniciativa: ${item.label}`,
+                                    `NPV: ${item.npv}k€`,
+                                    `PE: ${item.pe}% (${item.categoriaPE})`,
+                                    `Recursos: ${item.recursosRaw}k€`,
+                                    `Prioridad: ${item.prioridad}`
+                                ];
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Portafolio 2024 - NPV vs PE vs Recursos',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'NPV - Retorno (k€)',
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        },
+                        min: 200,
+                        max: 550,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'k€';
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'PE - Probabilidad de Éxito (%)',
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        },
+                        min: 10,
+                        max: 120,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        hoverRadius: 15,
+                        hoverBorderWidth: 3
+                    }
+                }
+            }
+        };
+
+        // Crear el gráfico 2024
+        const ctx2024 = document.getElementById('portfolioBubbleChart2024').getContext('2d');
+        new Chart(ctx2024, config2024);
+
+        // Crear leyenda personalizada 2024
+        function createLegend2024() {
+            const legendContainer = document.getElementById('chartLegend2024');
+            const initiatives2024 = [
+                { label: 'AI/ML for Platforms', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
+                { label: 'S/M Incentives', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
+                { label: 'Trust & Defense', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90%', recursos: '250k€', categoria: 'Alto' },
+                { label: 'Audit Online & SDLC', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '250k€', pe: '90%', recursos: '250k€', categoria: 'Alto' },
+                { label: 'ERP Core 2024', color: 'rgba(54, 162, 235, 1)', periodo: 'S1-2024', npv: '500k€', pe: '50%', recursos: '375k€', categoria: 'Medio' },
+                { label: 'CRM + CDP 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '500k€', pe: '50%', recursos: '250k€', categoria: 'Medio' },
+                { label: 'RPA Back-Office 2024', color: 'rgba(255, 99, 132, 1)', periodo: 'S2-2024', npv: '250k€', pe: '90%', recursos: '75k€', categoria: 'Alto' }
+            ];
+
+            initiatives2024.forEach(initiative => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                const emoji = initiative.categoria === 'Alto' ? '🟢' : initiative.categoria === 'Medio' ? '🟡' : '🔴';
+                legendItem.innerHTML = `
+                    <div class="legend-color" style="background-color: ${initiative.color}"></div>
+                    <span>${emoji} <strong>${initiative.label}</strong> (${initiative.periodo})<br>
+                    <small>NPV: ${initiative.npv} | PE: ${initiative.pe}% | Recursos: ${initiative.recursos}</small></span>
+                `;
+                legendContainer.appendChild(legendItem);
+            });
+        }
+
+        createLegend2024();
+    </script>
+</body>
+</html>
